@@ -9,6 +9,9 @@ services:
     ports:
       # Map container port 80 to host port 3000 (access via http://localhost:3000)
       - "3000:80" 
+    # Ensures frontend waits for backend
+    depends_on:
+      - backend
 
   # 2. Backend Service (Python API)
   backend:
@@ -20,9 +23,6 @@ services:
     ports:
       # Host Port : Container Port
       - "8000:8000"
-    # Ensures frontend waits for backend
-    depends_on:
-      - frontend
 networks:
   default:
     # Automatically set up a network named 'default'
